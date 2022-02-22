@@ -1,11 +1,13 @@
 package com.team3.phms.models;
 
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@Data
 @Entity
 @Table(name = "signs")
 public class Sign {
@@ -36,53 +38,4 @@ public class Sign {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getBloodPressure() {
-        return bloodPressure;
-    }
-
-    public void setBloodPressure(String bloodPressure) {
-        this.bloodPressure = bloodPressure;
-    }
-
-    public String getGlucoseLevel() {
-        return glucoseLevel;
-    }
-
-    public void setGlucoseLevel(String glucoseLevel) {
-        this.glucoseLevel = glucoseLevel;
-    }
-
-    public String getCholesterol() {
-        return cholesterol;
-    }
-
-    public void setCholesterol(String cholesterol) {
-        this.cholesterol = cholesterol;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }

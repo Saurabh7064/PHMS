@@ -1,12 +1,12 @@
 package com.team3.phms.controllers;
 
+import com.team3.phms.Advice.Response;
 import com.team3.phms.models.ERole;
 import com.team3.phms.models.Role;
 import com.team3.phms.models.User;
 import com.team3.phms.payload.request.LoginRequest;
 import com.team3.phms.payload.request.SignupRequest;
 import com.team3.phms.payload.response.JwtResponse;
-import com.team3.phms.payload.response.MessageResponse;
 import com.team3.phms.repository.RoleRepository;
 import com.team3.phms.repository.UserRepository;
 import com.team3.phms.security.jwt.JwtUtils;
@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,7 @@ public class AuthController {
     
     UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();    
     List<String> roles = userDetails.getAuthorities().stream()
-        .map(item -> item.getAuthority())
+        .map(GrantedAuthority::getAuthority)
         .collect(Collectors.toList());
 
     return ResponseEntity.ok(new JwtResponse(jwt, 
@@ -67,17 +68,13 @@ public class AuthController {
   }
 
   @PostMapping("/signup")
-  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+  public Response<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-      return ResponseEntity
-          .badRequest()
-          .body(new MessageResponse("Error: Username is already taken!"));
+      return Response.fail(500, "Error: Username is already taken!");
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-      return ResponseEntity
-          .badRequest()
-          .body(new MessageResponse("Error: Email is already in use!"));
+      return Response.fail(500, "Error: Email is already in use!");
     }
 
     // Create new user's account
@@ -118,6 +115,6 @@ public class AuthController {
     user.setRoles(roles);
     userRepository.save(user);
 
-    return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    return Response.success("User registered successfully!");
   }
 }

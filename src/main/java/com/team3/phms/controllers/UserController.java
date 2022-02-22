@@ -1,5 +1,6 @@
 package com.team3.phms.controllers;
 
+import com.team3.phms.Advice.Response;
 import com.team3.phms.models.User;
 import com.team3.phms.repository.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -21,25 +22,25 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> GetUserById(@PathVariable("id") long id) {
+    public Response<?> GetUserById(@PathVariable("id") long id) {
         Optional<User> userData = userRepository.findUserById(id);
-        return userData.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        if (!userData.isPresent()) {
+            return Response.fail(404, "fail to find user");
+        }
+
+        return Response.success(userData);
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<User>> GetUser(@RequestParam(required = false) String username) {
-        try {
-            List<User> users = new ArrayList<User>();
-            if (username == null)
-                users.addAll(userRepository.findAll());
-            else
-                users.addAll(userRepository.findByUsernameContaining(username));
-            if (users.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    public Response<?> GetUser(@RequestParam(required = false) String username) {
+        List<User> users = new ArrayList<>();
+        if (username == null)
+            users.addAll(userRepository.findAll());
+        else
+            users.addAll(userRepository.findByUsernameContaining(username));
+        if (users.isEmpty()) {
+            return Response.fail(404, "fail to find user");
         }
+        return Response.success(users);
     }
 }
