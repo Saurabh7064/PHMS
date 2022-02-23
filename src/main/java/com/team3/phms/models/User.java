@@ -3,7 +3,6 @@ package com.team3.phms.models;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.print.Doc;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -37,10 +36,31 @@ public class User {
   @Size(max = 120)
   private String password;
 
+  @Column(name = "age", length = 2)
   private Integer age;
 
-  @Column(name = "sex", nullable = true, length = 1)
-  private String sex;
+  @Column(name = "gender", length = 4)
+  private String gender;
+
+  @Column(name = "weight", length = 8)
+  private String weight;
+
+  @Column(name = "height", length = 8)
+  private String height;
+
+  public User() {
+
+  }
+
+  public User(String username, String email, String password, Integer age, String gender, String weight, String height) {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.age = age;
+    this.gender = gender;
+    this.weight = weight;
+    this.height = height;
+  }
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "user_roles",
@@ -52,11 +72,11 @@ public class User {
   private List<Sign> signsList = new ArrayList<>();
 
   @ManyToOne()
-  @JoinColumn(name="doctor_id", nullable=false)
+  @JoinColumn(name="doctor_id")
   private Doctor doctor;
 
   @ManyToOne()
-  @JoinColumn(name="diet_id", nullable=false)
+  @JoinColumn(name="diet_id")
   private Diet diet;
 
   @ManyToMany(fetch = FetchType.LAZY)
@@ -70,13 +90,4 @@ public class User {
           joinColumns = @JoinColumn(name = "user_id"),
           inverseJoinColumns = @JoinColumn(name = "medication_id"))
   private Set<Medication> medication = new HashSet<>();
-
-  public User() {
-  }
-
-  public User(String username, String email, String password) {
-    this.username = username;
-    this.email = email;
-    this.password = password;
-  }
 }

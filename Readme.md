@@ -22,26 +22,37 @@ Request:
 Response
 ```json
 {
-    "id": 3,
-    "username": "chen",
-    "email": "xbisatrouble@gmail.com",
-    "roles": [
-        "ROLE_USER"
+  "status":200,
+  "message":"success",
+  "data":{
+    "id":1,
+    "username":"test",
+    "email":"teset@gmail.com",
+    "roles":[
+      "ROLE_USER"
     ],
-    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjaGVuIiwiaWF0IjoxNjQ1NTA4OTQzLCJleHAiOjE2NDU1OTUzNDN9.QdFa5bUf2lNLxTTPmVP5AFIq6F0-6FUxYfZC3orIZS10kaTDFsaetgDcGw8e0JMUe4mXhU6zXNpAjXvxFUYcgw",
-    "tokenType": "Bearer"
+    "accessToken":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjQ1NTg3MjgwLCJleHAiOjE2NDU2NzM2ODB9.T4P8ILb4a8bFX0VgM0Xm-eDSQ8_wPKULY_lkwDw2beQiHVq3Yn8mWk2dqtUW67GxVeDApj1QHo339YQoR7Qunw",
+    "tokenType":"Bearer"
+  },
+  "timestamp":1645587280512
 }
 ```
 
 ### Registration
-url: localhost:8080/api/auth/signin
+url: localhost:8080/api/auth/signup
 
 method: POST
 
-| parma    | type   | description |
-|----------|--------|-------------|
-| username | string | user name   |
-| password | string | password    |
+| Parma    | Type   | Description        | Required |
+|----------|--------|--------------------|----------|
+| username | string | user name          | True     |
+| password | string | password           | True     |
+| email    | string | email              | True     |
+| role     | list   | role as admin/user | True     |
+| gender   | string | gender             | False    |
+| age      | int    | age                | False    |
+| weight   | string | weight             | False    |
+| height   | string | height             | False    |
 
 Request:
 ```json
@@ -52,12 +63,19 @@ Request:
   "role":[
     "user",
     "admin"
-  ]
+  ],
+  "gender": "",
+  "age": "",
+  "weight": "",
+  "height": ""
 }
 ```
 Response
 ```json
 {
-  "message": "User registered successfully!"
+  "status": 200,
+  "message": "success",
+  "data": "User registered successfully!",
+  "timestamp": 1645587380521
 }
 ```
