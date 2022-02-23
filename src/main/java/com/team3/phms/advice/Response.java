@@ -1,4 +1,4 @@
-package com.team3.phms.Advice;
+package com.team3.phms.advice;
 import lombok.Data;
 @Data
 public class Response<T> {

@@ -1,13 +1,11 @@
 package com.team3.phms.controllers;
 
-import com.team3.phms.Advice.Response;
+import com.team3.phms.advice.Response;
 import com.team3.phms.models.User;
-import com.team3.phms.repository.UserRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.team3.phms.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,15 +13,16 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class UserController {
-    final UserRepository userRepository;
+    final UserService userService;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/user/{id}")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public Response<?> GetUserById(@PathVariable("id") long id) {
-        Optional<User> userData = userRepository.findUserById(id);
+        Optional<User> userData = userService.GetUserById(id);
         if (!userData.isPresent()) {
             return Response.fail(404, "fail to find user");
         }
@@ -32,15 +31,19 @@ public class UserController {
     }
 
     @GetMapping("/user")
+    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public Response<?> GetUser(@RequestParam(required = false) String username) {
-        List<User> users = new ArrayList<>();
-        if (username == null)
-            users.addAll(userRepository.findAll());
-        else
-            users.addAll(userRepository.findByUsernameContaining(username));
+        List<User> users = userService.GetUser(username);
         if (users.isEmpty()) {
             return Response.fail(404, "fail to find user");
         }
         return Response.success(users);
+    }
+
+    @GetMapping("/user/me")
+    @PreAuthorize("hasRole('USER')")
+    public Response<?> GetMe() {
+        User user = userService.GetCurrentUser();
+        return Response.success(user);
     }
 }

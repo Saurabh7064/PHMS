@@ -1,4 +1,4 @@
-package com.team3.phms.Advice;
+package com.team3.phms.advice;
 
 public enum Code {
     RC100(200,"success"),
