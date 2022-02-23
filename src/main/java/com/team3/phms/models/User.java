@@ -3,6 +3,7 @@ package com.team3.phms.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.print.Doc;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -49,6 +50,20 @@ public class User {
 
   @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
   private List<Sign> signsList = new ArrayList<>();
+
+  @ManyToOne()
+  @JoinColumn(name="doctor_id", nullable=false)
+  private Doctor doctor;
+
+  @ManyToOne()
+  @JoinColumn(name="diet_id", nullable=false)
+  private Diet diet;
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "user_doctors",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "doctor_id"))
+  private Set<Doctor> doctors = new HashSet<>();
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "user_medications",
