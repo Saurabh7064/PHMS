@@ -1,4 +1,4 @@
-package com.team3.phms.Advice;
+package com.team3.phms.advice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;

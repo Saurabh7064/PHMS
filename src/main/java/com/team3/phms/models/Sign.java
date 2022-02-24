@@ -2,18 +2,29 @@ package com.team3.phms.models;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
 @Entity
 @Table(name = "signs")
+@SQLDelete(sql = "update signs set deleted = 1 where id = ?")
+@Where(clause = "deleted = 0")
 public class Sign {
+    public Sign() {
+
+    }
+
+    public Sign(String bloodPressure, String glucoseLevel, String cholesterol) {
+        this.bloodPressure = bloodPressure;
+        this.glucoseLevel = glucoseLevel;
+        this.cholesterol = cholesterol;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,15 +38,20 @@ public class Sign {
     @Column(length = 64)
     private String cholesterol;
 
-    @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
+    @Basic(optional = false)
+    @CreationTimestamp
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt = new Date(); // initialize created date
 
-    @LastModifiedDate
+    @UpdateTimestamp
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt = new Date();
 
     @ManyToOne
-    @JoinColumn(name="user_id")
     private User user;
+
+    @Column(name="deleted")
+    private Integer deleted = 0;
 }

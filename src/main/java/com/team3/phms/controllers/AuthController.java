@@ -1,6 +1,6 @@
 package com.team3.phms.controllers;
 
-import com.team3.phms.Advice.Response;
+import com.team3.phms.advice.Response;
 import com.team3.phms.models.ERole;
 import com.team3.phms.models.Role;
 import com.team3.phms.models.User;
@@ -55,7 +55,7 @@ public class AuthController {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String jwt = jwtUtils.generateJwtToken(authentication);
     
-    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();    
+    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
     List<String> roles = userDetails.getAuthorities().stream()
         .map(GrantedAuthority::getAuthority)
         .collect(Collectors.toList());

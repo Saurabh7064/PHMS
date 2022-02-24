@@ -68,7 +68,7 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
-  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  @OneToMany
   private List<Sign> signsList = new ArrayList<>();
 
   @ManyToOne()
