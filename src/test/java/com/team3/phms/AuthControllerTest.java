@@ -28,6 +28,75 @@ public class AuthControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
+    // Register
+    // TC1
+    @Test
+    public void SignUpTest() throws Exception {
+        String json = "{\"username\":\"test1111\",\"password\":\"test123123\",\"email\":\"test123@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(200))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    // TC2
+    @Test
+    public void SignUpUsernameTest() throws Exception {
+        String json = "{\"username\":\"t\",\"password\":\"test123123\",\"email\":\"test@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(500))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    // TC3
+    @Test
+    public void SignUpDuplicateNameTest() throws Exception {
+        String json = "{\"username\":\"test2\",\"password\":\"test123123\",\"email\":\"test@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Error: Username is already taken!"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    // TC3
+    @Test
+    public void SignUpDuplicateEmailTest() throws Exception {
+        String json = "{\"username\":\"test1111\",\"password\":\"test123123\",\"email\":\"test@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Error: Email is already in use!"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    // TC7
+    @Test
+    public void SignUpEmailTest() throws Exception {
+        String json = "{\"username\":\"t\",\"password\":\"t\",\"email\":\"test@gmail\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(500))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    // Login
+    // TC1
     @Test
     public void LoginTest() throws Exception {
         String json = "{\"username\":\"test3\",\"password\":\"test123123\"}";
@@ -39,14 +108,4 @@ public class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    @Test
-    public void SignUpTest() throws Exception {
-        String json = "{\"username\":\"test2\",\"password\":\"test123123\",\"email\":\"test@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signup")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(json)
-                )
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andDo(MockMvcResultHandlers.print());
-    }
 }
