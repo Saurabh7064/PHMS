@@ -29,7 +29,7 @@ public class AuthControllerTest {
     }
 
     // Register
-    // TC1
+    // TC1: Positive case, return user info and 200
     @Test
     public void SignUpTest() throws Exception {
         String json = "{\"username\":\"test1111\",\"password\":\"test123123\",\"email\":\"test123@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
@@ -42,7 +42,7 @@ public class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    // TC2
+    // TC2: UserID less than 5 characters is provided, return 500
     @Test
     public void SignUpUsernameTest() throws Exception {
         String json = "{\"username\":\"t\",\"password\":\"test123123\",\"email\":\"test@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
@@ -54,7 +54,7 @@ public class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    // TC3
+    // TC3: Duplicate username, return "Error: Username is already in use!" and 500
     @Test
     public void SignUpDuplicateNameTest() throws Exception {
         String json = "{\"username\":\"test2\",\"password\":\"test123123\",\"email\":\"test@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
@@ -67,7 +67,7 @@ public class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    // TC3
+    // TC3: Duplicate email, return "Error: Email is already in use!" and 500
     @Test
     public void SignUpDuplicateEmailTest() throws Exception {
         String json = "{\"username\":\"test111111\",\"password\":\"test123123\",\"email\":\"test@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
@@ -79,7 +79,7 @@ public class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    // TC7
+    // TC7: Incorrect email format, return 500
     @Test
     public void SignUpEmailTest() throws Exception {
         String json = "{\"username\":\"t\",\"password\":\"t\",\"email\":\"test@gmail\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
@@ -92,7 +92,7 @@ public class AuthControllerTest {
     }
 
     // Login
-    // TC1
+    // TC1: Enter correct username and password, return token and 200
     @Test
     public void LoginTest() throws Exception {
         String json = "{\"username\":\"test3\",\"password\":\"test123123\"}";
@@ -104,7 +104,7 @@ public class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    // TC2
+    // TC2: Enter wrong username or password, return "Bad credentials" and 500
     @Test
     public void LoginWrongUsernameOrPwdTest() throws Exception {
         String json = "{\"username\":\"test3\",\"password\":\"test1231123\"}";
@@ -113,10 +113,11 @@ public class AuthControllerTest {
                         .content(json)
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(500))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Bad credentials"))
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    // TC3
+    // TC3: Empty username or password, return 500
     @Test
     public void LoginEmptyTest() throws Exception {
         String json = "{\"username\":\"\",\"password\":\"\"}";
