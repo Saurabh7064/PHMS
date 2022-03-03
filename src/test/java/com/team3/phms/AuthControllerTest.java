@@ -39,7 +39,6 @@ public class AuthControllerTest {
                         .content(json)
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(200))
-                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -52,7 +51,6 @@ public class AuthControllerTest {
                         .content(json)
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(500))
-                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -72,13 +70,12 @@ public class AuthControllerTest {
     // TC3
     @Test
     public void SignUpDuplicateEmailTest() throws Exception {
-        String json = "{\"username\":\"test1111\",\"password\":\"test123123\",\"email\":\"test@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
+        String json = "{\"username\":\"test111111\",\"password\":\"test123123\",\"email\":\"test@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signup")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json)
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Error: Email is already in use!"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -91,7 +88,6 @@ public class AuthControllerTest {
                         .content(json)
                 )
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(500))
-                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
 
@@ -108,4 +104,27 @@ public class AuthControllerTest {
                 .andDo(MockMvcResultHandlers.print());
     }
 
+    // TC2
+    @Test
+    public void LoginWrongUsernameOrPwdTest() throws Exception {
+        String json = "{\"username\":\"test3\",\"password\":\"test1231123\"}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signin")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(500))
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    // TC3
+    @Test
+    public void LoginEmptyTest() throws Exception {
+        String json = "{\"username\":\"\",\"password\":\"\"}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signin")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                )
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(500))
+                .andDo(MockMvcResultHandlers.print());
+    }
 }
