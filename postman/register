@@ -1,0 +1,16 @@
+# TC2
+curl --location --request POST '150.158.142.171:8080/api/auth/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{"username":"t","password":"test2123","email":"test@gmail","role":["user","admin"],"gender":"","age":"","weight":"","height":""}'
+# TC3
+curl --location --request POST '150.158.142.171:8080/api/auth/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{"username":"test1111","password":"test123123","email":"test123@gmail.com","role":["user","admin"],"gender":"","age":"","weight":"","height":""}'
+# TC3
+curl --location --request POST '150.158.142.171:8080/api/auth/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{"username":"test2","password":"test123123","email":"test@gmail.com","role":["user","admin"],"gender":"","age":"","weight":"","height":""}'
+# TC7
+curl --location --request POST '150.158.142.171:8080/api/auth/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{"username":"test2","password":"test2123","email":"test@gmail","role":["user","admin"],"gender":"","age":"","weight":"","height":""}'
