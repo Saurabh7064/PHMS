@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "3c67de3a-43e4-40d6-b152-5da9954bbb68",
+		"name": "PHMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "150.158.142.171:8080/api/auth/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"eewew\",\"password\":\"test2123\",\"email\":\"tesewewt@gmail\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}"
+				},
+				"url": {
+					"raw": "150.158.142.171:8080/api/auth/signup",
+					"host": [
+						"150",
+						"158",
+						"142",
+						"171"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "150.158.142.171:8080/api/auth/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"test1111\",\"password\":\"test123123\",\"email\":\"test123@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}"
+				},
+				"url": {
+					"raw": "150.158.142.171:8080/api/auth/signup",
+					"host": [
+						"150",
+						"158",
+						"142",
+						"171"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "150.158.142.171:8080/api/auth/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"test2\",\"password\":\"test123123\",\"email\":\"test@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}"
+				},
+				"url": {
+					"raw": "150.158.142.171:8080/api/auth/signup",
+					"host": [
+						"150",
+						"158",
+						"142",
+						"171"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "150.158.142.171:8080/api/auth/signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"test2\",\"password\":\"test2123\",\"email\":\"test@gmail\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}"
+				},
+				"url": {
+					"raw": "150.158.142.171:8080/api/auth/signup",
+					"host": [
+						"150",
+						"158",
+						"142",
+						"171"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
