@@ -1,0 +1,12 @@
+# TC1
+curl --location --request POST '150.158.142.171:8080/api/auth/signin' \
+--header 'Content-Type: application/json' \
+--data-raw '{"username":"1","password":"1"}'
+# TC2
+curl --location --request POST '150.158.142.171:8080/api/auth/signin' \
+--header 'Content-Type: application/json' \
+--data-raw '{"username":"test3","password":"test123123"}'
+# TC3
+curl --location --request POST '150.158.142.171:8080/api/auth/signin' \
+--header 'Content-Type: application/json' \
+--data-raw '{"username":"","password":""}'
