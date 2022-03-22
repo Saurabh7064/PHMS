@@ -292,3 +292,183 @@ Method: Delete
     "timestamp": 1645726847300
 }
 ```
+
+## Vital Signs
+
+### GetOne
+Url: 150.158.142.171:8080/api/vital/{id}
+
+Authorization: User
+
+Method: Get
+
+```json
+{
+    "status": 400,
+    "message": "wrong id or not authed",
+    "data": null,
+    "timestamp": 1645726570231
+}
+```
+
+```json
+{
+  "status": 200,
+  "message": "success",
+  "data": {
+    "id": 1,
+    "name": "1",
+    "frequency": "1",
+    "frequencyDay": "1",
+    "metrics": "1",
+    "time": "2022-03-22T15:51:17.000+00:00",
+    "startDate": "2022-03-22T15:51:14.000+00:00",
+    "createdAt": "2022-03-22T15:51:18.000+00:00",
+    "updatedAt": "2022-03-22T15:51:20.000+00:00",
+    "user": {
+    }
+  },
+  "timestamp": 1647965221348
+}
+```
+
+### Create
+Url: 150.158.142.171:8080/api/vital
+
+Authorization: User
+
+Method: Post
+
+Request
+```json
+{
+  "name":"1",
+  "frequency":"1",
+  "frequencyDay":"1",
+  "metrics":"1",
+  "time":"2022-03-22",
+  "startDate":"2022-03-22"
+}
+```
+Response
+```json
+{
+  "status": 200,
+  "message": "success",
+  "data": {
+    "id": 3,
+    "name": "1",
+    "frequency": "1",
+    "frequencyDay": "1",
+    "metrics": "1",
+    "time": "2022-03-22T00:00:00.000+00:00",
+    "startDate": "2022-03-22T00:00:00.000+00:00",
+    "createdAt": "2022-03-22T16:11:08.416+00:00",
+    "updatedAt": "2022-03-22T16:11:08.416+00:00"
+  },
+  "timestamp": 1647965468551
+}
+```
+
+### Update
+Url: 150.158.142.171:8080/api/vital
+
+Authorization: User
+
+Method: Put
+
+Request
+```json
+{
+  "name":"1",
+  "frequency":"1",
+  "frequencyDay":"1",
+  "metrics":"1",
+  "time":"2022-03-22",
+  "startDate":"2022-03-22"
+}
+```
+Response
+```json
+{
+  "status": 200,
+  "message": "success",
+  "data": {
+    "id": 3,
+    "name": "1",
+    "frequency": "1",
+    "frequencyDay": "1",
+    "metrics": "1",
+    "time": "2022-03-22T00:00:00.000+00:00",
+    "startDate": "2022-03-22T00:00:00.000+00:00",
+    "createdAt": "2022-03-22T16:11:08.416+00:00",
+    "updatedAt": "2022-03-22T16:11:08.416+00:00"
+  },
+  "timestamp": 1647965468551
+}
+```
+
+### Delete
+Url: 150.158.142.171:8080/api/vital/{id}
+
+Authorization: User
+
+Method: Delete
+
+```json
+{
+  "status": 200,
+  "message": "success",
+  "data": true,
+  "timestamp": 1647967004705
+}
+```
+## Medication
+
+### GetOne
+Url: 150.158.142.171:8080/api/medication/{id}
+
+Authorization: User
+
+Method: Get
+
+```json
+{
+  "status": 200,
+  "message": "success",
+  "data": {
+    "id": 2,
+    "name": "1"
+  },
+  "timestamp": 1647968280723
+}
+```
+
+### Create
+Url: 150.158.142.171:8080/api/medication
+
+Authorization: User
+
+Method: Post
+
+Request
+```json
+{
+  "name": "test"
+}
+```
+Response
+```json
+{
+  "status": 200,
+  "message": "success",
+  "data": {
+    "id": 4,
+    "name": "test",
+    "users": [
+      
+    ]
+  },
+  "timestamp": 1647968574586
+}
+```

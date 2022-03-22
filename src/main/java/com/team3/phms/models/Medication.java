@@ -18,9 +18,17 @@ public class Medication {
     @Column(length = 64)
     private String name;
 
+    public Medication(String name) {
+        this.name = name;
+    }
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_medications",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "medication_id"))
     private Set<User> users = new HashSet<>();
+
+    public Medication() {
+
+    }
 }
