@@ -68,26 +68,26 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
-  @OneToMany
-  private List<Sign> signsList = new ArrayList<>();
-
-  @ManyToOne()
-  @JoinColumn(name="doctor_id")
-  private Doctor doctor;
-
-  @ManyToOne()
-  @JoinColumn(name="diet_id")
-  private Diet diet;
-
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "user_doctors",
-          joinColumns = @JoinColumn(name = "user_id"),
-          inverseJoinColumns = @JoinColumn(name = "doctor_id"))
-  private Set<Doctor> doctors = new HashSet<>();
-
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "user_medications",
-          joinColumns = @JoinColumn(name = "user_id"),
-          inverseJoinColumns = @JoinColumn(name = "medication_id"))
-  private Set<Medication> medication = new HashSet<>();
+//  @OneToMany
+//  private List<Sign> signsList = new ArrayList<>();
+//
+//  @ManyToOne()
+//  @JoinColumn(name="doctor_id")
+//  private Doctor doctor;
+//
+//  @ManyToOne()
+//  @JoinColumn(name="diet_id")
+//  private Diet diet;
+//
+//  @ManyToMany(fetch = FetchType.LAZY)
+//  @JoinTable(name = "user_doctors",
+//          joinColumns = @JoinColumn(name = "user_id"),
+//          inverseJoinColumns = @JoinColumn(name = "doctor_id"))
+//  private Set<Doctor> doctors = new HashSet<>();
+//
+//  @ManyToMany(fetch = FetchType.LAZY)
+//  @JoinTable(name = "user_medications",
+//          joinColumns = @JoinColumn(name = "user_id"),
+//          inverseJoinColumns = @JoinColumn(name = "medication_id"))
+//  private Set<Medication> medication = new HashSet<>();
 }

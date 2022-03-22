@@ -72,7 +72,6 @@ public class SignController {
         if (!sign.isPresent()) {
             return Response.fail(400, "wrong id or not authed");
         }
-        System.out.println(sign);
         Sign signed = signService.UpdateSign(sign.get(), signRequest.getBloodPressure(), signRequest.getGlucoseLevel(), signRequest.getCholesterol());
         return Response.success(signed);
     }
