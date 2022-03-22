@@ -85,7 +85,7 @@ public class SignController {
         if (!sign.isPresent()) {
             return Response.fail(400, "wrong id or not authed");
         }
-        signService.DeleteSign(sign.get());
-        return Response.success("True");
+        Boolean flag = signService.DeleteSign(sign.get());
+        return Response.success(flag);
     }
 }

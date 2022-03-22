@@ -4,8 +4,9 @@ package com.team3.phms.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
 
 @Data
 @Entity
@@ -22,5 +23,5 @@ public class Medication {
     @JoinTable(name = "user_medications",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "medication_id"))
-    private Set<User> users = new HashSet<>();
+    private Map<Long, User> users = new HashMap<>();
 }
