@@ -35,7 +35,6 @@ public class SignController {
     }
 
     @GetMapping("/sign")
-    @PreAuthorize("hasRole('ADMIN')")
     public Response<?> GetAllSign() {
         List<Sign> sign = signService.GetAll();
         return Response.success(sign);
