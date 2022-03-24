@@ -4,6 +4,7 @@ package com.team3.phms.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,21 @@ public class Medication {
 
     @Column(length = 64)
     private String name;
+
+    @Column()
+    private String dosage;
+
+    @Column
+    private Date startData;
+
+    @Column
+    private String frequency;
+
+    @Column
+    private String time;
+
+    @Column
+    private String frequencyDay;
 
     public Medication(String name) {
         this.name = name;
