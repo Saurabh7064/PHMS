@@ -18,6 +18,10 @@ public class VitalService {
         this.vitalRepository = vitalRepository;
     }
 
+    public List<Vital> GetAllVitalByUser(User user) {
+        return vitalRepository.findAllByUser(user);
+    }
+
     public Optional<Vital> GetVitalByIdAuth(Long id, User user) {
         Optional<Vital> vital = vitalRepository.findById(id);
         if (!vital.isPresent() || vital.get().getUser()!=user) {

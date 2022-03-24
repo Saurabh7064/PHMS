@@ -32,7 +32,7 @@ public class AuthControllerTest {
     // TC1: Positive case, return user info and 200
     @Test
     public void SignUpTest() throws Exception {
-        String json = "{\"username\":\"test1111\",\"password\":\"test123123\",\"email\":\"test123@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
+        String json = "{\"username\":\"test1112311\",\"password\":\"test123123\",\"email\":\"test112323@gmail.com\",\"role\":[\"user\",\"admin\"],\"gender\":\"\",\"age\":\"\",\"weight\":\"\",\"height\":\"\"}";
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/signup")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)

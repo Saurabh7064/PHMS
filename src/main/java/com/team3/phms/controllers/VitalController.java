@@ -1,6 +1,7 @@
 package com.team3.phms.controllers;
 
 import com.team3.phms.advice.Response;
+import com.team3.phms.models.Sign;
 import com.team3.phms.models.Vital;
 import com.team3.phms.models.User;
 import com.team3.phms.payload.request.VitalRequest;
@@ -10,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -22,6 +24,20 @@ public class VitalController {
     public VitalController(UserService userService, VitalService vitalService) {
         this.userService = userService;
         this.vitalService = vitalService;
+    }
+
+    @GetMapping("/vital")
+    public Response<?> GetAllVital() {
+        List<Vital> vital = vitalService.GetAll();
+        return Response.success(vital);
+    }
+
+    @GetMapping("/vital/feed")
+    @PreAuthorize("hasRole('USER')")
+    public Response<?> GetSignFeed() {
+        User user = userService.GetCurrentUser();
+        List<Vital> vitals = vitalService.GetAllVitalByUser(user);
+        return Response.success(vitals);
     }
 
     @GetMapping("/vital/{id}")
