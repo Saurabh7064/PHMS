@@ -6,7 +6,6 @@ import com.team3.phms.models.User;
 import com.team3.phms.payload.request.DietRequest;
 import com.team3.phms.service.DietService;
 import com.team3.phms.service.UserService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,15 +31,13 @@ public class DietController {
     }
 
     @PostMapping("/diet")
-    @PreAuthorize("hasRole('USER')")
     public Response<?> Create(@Valid @RequestBody DietRequest dietRequest) {
-        User user = userService.GetCurrentUser();
+        Optional<User> user = userService.GetUserById((long) 3);
         Diet diet = dietService.Create(dietRequest.getHeight(), dietRequest.getWeight(), dietRequest.getPlan(), user);
         return Response.success(diet);
     }
 
     @DeleteMapping("/diet/{id}")
-    @PreAuthorize("hasRole('USER')")
     public Response<?> Delete(@PathVariable("id") Long id) {
         Optional<Diet> diet = dietService.Get(id);
         return Response.success(dietService.Delete(diet.get()));
