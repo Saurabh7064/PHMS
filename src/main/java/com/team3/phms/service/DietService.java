@@ -24,7 +24,7 @@ public class DietService {
         return this.dietRepository.findById(id);
     }
 
-    public Diet Create(String height, String weight, String plan, User user) {
+    public Diet Create(String height, String weight, String plan, Optional<User> user) {
         Diet diet = new Diet(height, weight, plan);
         double h = Double.parseDouble(height);
         double w = Double.parseDouble(weight);
