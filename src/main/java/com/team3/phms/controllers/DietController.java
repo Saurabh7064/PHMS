@@ -33,7 +33,7 @@ public class DietController {
     @PostMapping("/diet")
     public Response<?> Create(@Valid @RequestBody DietRequest dietRequest) {
         Optional<User> user = userService.GetUserById((long) 3);
-        Diet diet = dietService.Create(dietRequest.getHeight(), dietRequest.getWeight(), dietRequest.getPlan(), user);
+        Diet diet = dietService.Create(dietRequest.getHeight(), dietRequest.getWeight(), dietRequest.getPlan(), user.get());
         return Response.success(diet);
     }
 
