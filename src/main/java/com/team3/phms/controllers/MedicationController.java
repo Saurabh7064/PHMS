@@ -4,6 +4,7 @@ import com.team3.phms.advice.Response;
 import com.team3.phms.models.Medication;
 import com.team3.phms.models.User;
 import com.team3.phms.payload.request.MedicationRequest;
+import com.team3.phms.payload.request.SearchRequest;
 import com.team3.phms.service.MedicationService;
 import com.team3.phms.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -50,7 +51,12 @@ public class MedicationController {
         if (medication == null) {
             return Response.fail(400, "failed to create medication");
         }
-
         return Response.success(medication);
+    }
+
+    @PostMapping("/medication/search")
+    public Response<?> Search(@RequestBody SearchRequest searchRequest) {
+        List<Medication> medications = medicationService.FindByNameLike(searchRequest.getKeyword());
+        return Response.success(medications);
     }
 }
