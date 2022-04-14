@@ -29,4 +29,8 @@ public class MedicationService {
         medication.getUsers().add(user);
         return medicationRepository.save(medication);
     }
+
+    public List<Medication> FindByNameLike(String name) {
+        return medicationRepository.findAllByNameLike("%" + name + "%");
+    }
 }
