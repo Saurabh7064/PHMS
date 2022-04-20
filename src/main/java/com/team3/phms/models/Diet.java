@@ -13,11 +13,27 @@ public class Diet {
     private Long id;
 
     @Column(length = 64)
-    private String foodIntake;
+    private String height;
 
     @Column(length = 64)
-    private String calorieCount;
+    private String bmi;
 
     @Column(length = 64)
     private String weight;
+
+    @Column(length = 255)
+    private String plan;
+
+    @ManyToOne
+    private User user;
+
+    public Diet(String height, String weight, String plan) {
+        this.height = height;
+        this.weight = weight;
+        this.plan = plan;
+    }
+
+    public Diet() {
+
+    }
 }
