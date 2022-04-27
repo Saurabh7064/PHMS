@@ -1,8 +1,8 @@
 package com.team3.phms.models;
 
 import lombok.Data;
-
 import javax.persistence.*;
+
 @Data
 @Entity
 @Table(name = "appointment")
