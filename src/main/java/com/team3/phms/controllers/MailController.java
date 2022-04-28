@@ -27,17 +27,13 @@ public class MailController {
         List<User> users = userService.GetUser("");
 
         for (User user:users) {
-            if (Objects.equals(user.getUsername(), "xb") || Objects.equals(user.getUsername(), "neenagpt1") ||
-            Objects.equals(user.getUsername(), "sibangee") || Objects.equals(user.getUsername(), "Vishnu") ||
-                    Objects.equals(user.getUsername(), "Manoj") || Objects.equals(user.getUsername(), "manojranga")) {
-                try {
-                    String subject = "Team 4 Message";
-                    String content = mailRequest.getMessage();
-                    String email = user.getEmail();
-                    mailService.sendMail(email, subject, content);
-                } catch (Exception e) {
-                    return Response.fail(500, e.getMessage());
-                }
+            try {
+                String subject = "Team 4 Message";
+                String content = mailRequest.getMessage();
+                String email = user.getEmail();
+                mailService.sendMail(email, subject, content);
+            } catch (Exception e) {
+                return Response.fail(500, e.getMessage());
             }
         }
         return Response.success("success");
